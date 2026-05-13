@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerShell Kvíz</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: #1e293b;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+        text-align: center;
+        color: #38bdf8;
+    }
+
+    .question {
+        margin-bottom: 25px;
+        padding: 15px;
+        background: #334155;
+        border-radius: 10px;
+    }
+
+    .question h3 {
+        margin-top: 0;
+    }
+
+    button {
+        background: #38bdf8;
+        border: none;
+        padding: 12px 20px;
+        color: black;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background: #0ea5e9;
+    }
+
+    .result {
+        margin-top: 20px;
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .correct {
+        color: #22c55e;
+    }
+
+    .wrong {
+        color: #ef4444;
+    }
+
+    code {
+        background: #0f172a;
+        padding: 2px 6px;
+        border-radius: 5px;
+        color: #facc15;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>PowerShell Kvíz</h1>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <h3>1. Melyik parancs listázza a futó folyamatokat?</h3>
+            <label><input type="radio" name="q1" value="a"> Get-Service</label><br>
+            <label><input type="radio" name="q1" value="b"> Get-Process</label><br>
+            <label><input type="radio" name="q1" value="c"> Start-Process</label>
+        </div>
+
+        <div class="question">
+            <h3>2. Melyik parancs indítja el a Jegyzettömböt?</h3>
+            <label><input type="radio" name="q2" value="a"> Stop-Process notepad</label><br>
+            <label><input type="radio" name="q2" value="b"> Start-Process notepad</label><br>
+            <label><input type="radio" name="q2" value="c"> Get-Notepad</label>
+        </div>
+
+        <div class="question">
+            <h3>3. Melyik parancs zárja be a Notepadot?</h3>
+            <label><input type="radio" name="q3" value="a"> Stop-Process -Name notepad</label><br>
+            <label><input type="radio" name="q3" value="b"> Exit-Notepad</label><br>
+            <label><input type="radio" name="q3" value="c"> Close-Window</label>
+        </div>
+
+        <div class="question">
+            <h3>4. Melyik parancs listázza a szolgáltatásokat?</h3>
+            <label><input type="radio" name="q4" value="a"> Get-Service</label><br>
+            <label><input type="radio" name="q4" value="b"> List-Service</label><br>
+            <label><input type="radio" name="q4" value="c"> Show-Service</label>
+        </div>
+
+        <div class="question">
+            <h3>5. Melyik parancs indítja el a spooler szolgáltatást?</h3>
+            <label><input type="radio" name="q5" value="a"> Start-Service spooler</label><br>
+            <label><input type="radio" name="q5" value="b"> Run-Service spooler</label><br>
+            <label><input type="radio" name="q5" value="c"> Enable-Service spooler</label>
+        </div>
+
+        <div class="question">
+            <h3>6. Melyik parancs listázza a fájlokat és mappákat?</h3>
+            <label><input type="radio" name="q6" value="a"> dir</label><br>
+            <label><input type="radio" name="q6" value="b"> Get-ChildItem</label><br>
+            <label><input type="radio" name="q6" value="c"> Mindkettő</label>
+        </div>
+
+        <div class="question">
+            <h3>7. Mi a rövid alakja a <code>Set-Location</code> parancsnak?</h3>
+            <label><input type="radio" name="q7" value="a"> move</label><br>
+            <label><input type="radio" name="q7" value="b"> cd</label><br>
+            <label><input type="radio" name="q7" value="c"> go</label>
+        </div>
+
+        <div class="question">
+            <h3>8. Melyik parancs mutat segítséget?</h3>
+            <label><input type="radio" name="q8" value="a"> Help-Me</label><br>
+            <label><input type="radio" name="q8" value="b"> Get-Help</label><br>
+            <label><input type="radio" name="q8" value="c"> Show-Help</label>
+        </div>
+
+        <div class="question">
+            <h3>9. Melyik parancs teszteli a kapcsolatot egy szerverrel?</h3>
+            <label><input type="radio" name="q9" value="a"> Ping-Test</label><br>
+            <label><input type="radio" name="q9" value="b"> Test-Connection</label><br>
+            <label><input type="radio" name="q9" value="c"> Connect-Test</label>
+        </div>
+
+        <div class="question">
+            <h3>10. Melyik parancs hoz létre új mappát?</h3>
+            <label><input type="radio" name="q10" value="a"> Make-Folder</label><br>
+            <label><input type="radio" name="q10" value="b"> New-Item -ItemType Directory</label><br>
+            <label><input type="radio" name="q10" value="c"> Create-Dir</label>
+        </div>
+
+        <div class="question">
+            <h3>11. Melyik parancs másol fájlokat?</h3>
+            <label><input type="radio" name="q11" value="a"> Copy-Item</label><br>
+            <label><input type="radio" name="q11" value="b"> Move-Item</label><br>
+            <label><input type="radio" name="q11" value="c"> Duplicate-File</label>
+        </div>
+
+        <div class="question">
+            <h3>12. Melyik parancs indítja újra a számítógépet?</h3>
+            <label><input type="radio" name="q12" value="a"> Restart-Computer</label><br>
+            <label><input type="radio" name="q12" value="b"> Reboot-PC</label><br>
+            <label><input type="radio" name="q12" value="c"> Shutdown-Restart</label>
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Kvíz kiértékelése</button>
+
+        <div class="result" id="result"></div>
+    </form>
+</div>
+
+<script>
+function checkQuiz() {
+
+    const answers = {
+        q1: "b",
+        q2: "b",
+        q3: "a",
+        q4: "a",
+        q5: "a",
+        q6: "c",
+        q7: "b",
+        q8: "b",
+        q9: "b",
+        q10: "b",
+        q11: "a",
+        q12: "a"
+    };
+
+    let score = 0;
+
+    for (let q in answers) {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+            score++;
+        }
+    }
+
+    const result = document.getElementById("result");
+
+    result.innerHTML = `Eredmény: ${score} / 12`;
+
+    if(score >= 10){
+        result.className = "result correct";
+        result.innerHTML += "<br>Kiváló! A PowerShell nem győzött le teljesen. Ritka esemény.";
+    } else if(score >= 6){
+        result.className = "result";
+        result.innerHTML += "<br>Nem rossz. A rendszergazdák még nem üldöznek fáklyákkal.";
+    } else {
+        result.className = "result wrong";
+        result.innerHTML += "<br>Ideje több időt tölteni PowerShellben és kevesebbet random kattintgatással.";
+    }
+}
+</script>
+
+</body>
+</html>
