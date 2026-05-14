@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PowerShell Kvíz</title>
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -32,6 +33,7 @@
         padding: 15px;
         background: #334155;
         border-radius: 10px;
+        transition: 0.3s;
     }
 
     .question h3 {
@@ -74,11 +76,18 @@
         border-radius: 5px;
         color: #facc15;
     }
+
+    .feedback {
+        margin-top: 10px;
+        font-weight: bold;
+    }
 </style>
+
 </head>
 <body>
 
 <div class="container">
+
     <h1>PowerShell Kvíz</h1>
 
     <form id="quizForm">
@@ -170,10 +179,13 @@
         <button type="button" onclick="checkQuiz()">Kvíz kiértékelése</button>
 
         <div class="result" id="result"></div>
+
     </form>
+
 </div>
 
 <script>
+
 function checkQuiz() {
 
     const answers = {
@@ -195,20 +207,28 @@ function checkQuiz() {
 
     document.querySelectorAll(".feedback").forEach(el => el.remove());
 
+    document.querySelectorAll(".question").forEach(q => {
+        q.style.border = "none";
+    });
+
     for (let q in answers) {
 
         let selected = document.querySelector(`input[name="${q}"]:checked`);
-        let questionDiv = document.querySelector(`input[name="${q}"]`).closest(".question");
+        let firstInput = document.querySelector(`input[name="${q}"]`);
+
+        if (!firstInput) continue;
+
+        let questionDiv = firstInput.closest(".question");
 
         if (selected && selected.value === answers[q].correct) {
 
             score++;
+
             questionDiv.style.border = "3px solid #22c55e";
 
             let feedback = document.createElement("div");
             feedback.className = "feedback";
             feedback.style.color = "#22c55e";
-            feedback.style.marginTop = "10px";
             feedback.innerHTML = "✔ Helyes válasz!";
             questionDiv.appendChild(feedback);
 
@@ -219,7 +239,6 @@ function checkQuiz() {
             let feedback = document.createElement("div");
             feedback.className = "feedback";
             feedback.style.color = "#ef4444";
-            feedback.style.marginTop = "10px";
             feedback.innerHTML = `✖ Helyes válasz: <b>${answers[q].text}</b>`;
             questionDiv.appendChild(feedback);
         }
@@ -230,16 +249,22 @@ function checkQuiz() {
     result.innerHTML = `Eredmény: ${score} / 12`;
 
     if(score >= 10){
+
         result.className = "result correct";
-        result.innerHTML += "<br>Kiváló! A PowerShell nem győzött le teljesen.";
+        result.innerHTML += "<br>Kiváló!";
+
     } else if(score >= 6){
+
         result.className = "result";
         result.innerHTML += "<br>Nem rossz eredmény.";
+
     } else {
+
         result.className = "result wrong";
         result.innerHTML += "<br>Gyakorlás ajánlott.";
     }
 }
+
 </script>
 
 </body>
