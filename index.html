@@ -177,26 +177,51 @@
 function checkQuiz() {
 
     const answers = {
-        q1: "b",
-        q2: "b",
-        q3: "a",
-        q4: "a",
-        q5: "a",
-        q6: "c",
-        q7: "b",
-        q8: "b",
-        q9: "b",
-        q10: "b",
-        q11: "a",
-        q12: "a"
+        q1: {correct: "b", text: "Get-Process"},
+        q2: {correct: "b", text: "Start-Process notepad"},
+        q3: {correct: "a", text: "Stop-Process -Name notepad"},
+        q4: {correct: "a", text: "Get-Service"},
+        q5: {correct: "a", text: "Start-Service spooler"},
+        q6: {correct: "c", text: "Mindkettő"},
+        q7: {correct: "b", text: "cd"},
+        q8: {correct: "b", text: "Get-Help"},
+        q9: {correct: "b", text: "Test-Connection"},
+        q10: {correct: "b", text: "New-Item -ItemType Directory"},
+        q11: {correct: "a", text: "Copy-Item"},
+        q12: {correct: "a", text: "Restart-Computer"}
     };
 
     let score = 0;
 
+    document.querySelectorAll(".feedback").forEach(el => el.remove());
+
     for (let q in answers) {
+
         let selected = document.querySelector(`input[name="${q}"]:checked`);
-        if (selected && selected.value === answers[q]) {
+        let questionDiv = document.querySelector(`input[name="${q}"]`).closest(".question");
+
+        if (selected && selected.value === answers[q].correct) {
+
             score++;
+            questionDiv.style.border = "3px solid #22c55e";
+
+            let feedback = document.createElement("div");
+            feedback.className = "feedback";
+            feedback.style.color = "#22c55e";
+            feedback.style.marginTop = "10px";
+            feedback.innerHTML = "✔ Helyes válasz!";
+            questionDiv.appendChild(feedback);
+
+        } else {
+
+            questionDiv.style.border = "3px solid #ef4444";
+
+            let feedback = document.createElement("div");
+            feedback.className = "feedback";
+            feedback.style.color = "#ef4444";
+            feedback.style.marginTop = "10px";
+            feedback.innerHTML = `✖ Helyes válasz: <b>${answers[q].text}</b>`;
+            questionDiv.appendChild(feedback);
         }
     }
 
@@ -206,13 +231,13 @@ function checkQuiz() {
 
     if(score >= 10){
         result.className = "result correct";
-        result.innerHTML += "<br>Kiváló! A PowerShell nem győzött le teljesen. Ritka esemény.";
+        result.innerHTML += "<br>Kiváló! A PowerShell nem győzött le teljesen.";
     } else if(score >= 6){
         result.className = "result";
-        result.innerHTML += "<br>Nem rossz. A rendszergazdák még nem üldöznek fáklyákkal.";
+        result.innerHTML += "<br>Nem rossz eredmény.";
     } else {
         result.className = "result wrong";
-        result.innerHTML += "<br>Ideje több időt tölteni PowerShellben és kevesebbet random kattintgatással.";
+        result.innerHTML += "<br>Gyakorlás ajánlott.";
     }
 }
 </script>
